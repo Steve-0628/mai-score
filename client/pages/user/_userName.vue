@@ -20,6 +20,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
 import { db } from '~/plugins/firestore'
 import { ScoreData, GotScoreData, MusicData, ChartData } from '~/types'
+import * as User from '~/store/user/type'
 @Component({
   head() {
     return {
@@ -55,7 +56,9 @@ import { ScoreData, GotScoreData, MusicData, ChartData } from '~/types'
   }
 })
 export default class UserName extends Vue {
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   scoreData: ScoreData[] = []
 

@@ -63,13 +63,16 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
 import auth from '~/plugins/auth'
+import * as User from '~/store/user/type'
 @Component({
   components: {
     Loading: () => import('~/components/Loading.vue')
   }
 })
 export default class TheLoginForm extends Vue {
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   @Prop() RegistFlg?: boolean
 

@@ -15,6 +15,7 @@ import { Component, Vue } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
 import { db } from '~/plugins/firestore'
 import { ScoreData, GotScoreData, MusicData, ChartData } from '~/types'
+import * as User from '~/store/user/type'
 @Component({
   head: {
     title: 'マイスコア'
@@ -44,7 +45,9 @@ import { ScoreData, GotScoreData, MusicData, ChartData } from '~/types'
   }
 })
 export default class MyScore extends Vue {
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   scoreData: ScoreData[] = []
 

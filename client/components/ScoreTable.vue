@@ -174,6 +174,7 @@
 import { Component, Vue, Prop } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
 import { ScoreData } from '~/types'
+import * as User from '~/store/user/type'
 @Component({
   components: {
     Loading: () => import('~/components/Loading.vue')
@@ -182,7 +183,9 @@ import { ScoreData } from '~/types'
 export default class ScoreTable extends Vue {
   @Prop() scoreData?: ScoreData[]
 
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   @Prop() readonly tableLoadFlg!: boolean
 
@@ -368,7 +371,7 @@ export default class ScoreTable extends Vue {
         text: 'ジャンル',
         value: 'genre',
         filter: (value: string) => {
-          return this.filterOption.genre.some((v) => v === value)
+          return this.filterOption.genre.includes(value)
         },
         divider: true
       },
@@ -376,7 +379,7 @@ export default class ScoreTable extends Vue {
         text: 'バージョン',
         value: 'version',
         filter: (value: string) => {
-          return !value || this.filterOption.version.some((v) => v === value)
+          return !value || this.filterOption.version.includes(value)
         },
         divider: true
       },
@@ -384,7 +387,7 @@ export default class ScoreTable extends Vue {
         text: '難易度',
         value: 'difficultyLevel',
         filter: (value: string) => {
-          return this.filterOption.difficultyLevel.some((v) => v === value)
+          return this.filterOption.difficultyLevel.includes(value)
         },
         divider: true
       },
@@ -392,7 +395,7 @@ export default class ScoreTable extends Vue {
         text: 'レベル',
         value: 'level',
         filter: (value: number) => {
-          return this.filterOption.level.some((v) => v === value)
+          return this.filterOption.level.includes(value)
         },
         divider: true
       },
@@ -400,7 +403,7 @@ export default class ScoreTable extends Vue {
         text: '譜面',
         value: 'type',
         filter: (value: string) => {
-          return this.filterOption.type.some((v) => v === value)
+          return this.filterOption.type.includes(value)
         },
         divider: true
       },

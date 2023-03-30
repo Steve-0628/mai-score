@@ -1,6 +1,6 @@
-import { Getters, Mutations, Actions } from 'vuex'
 import { S, G, M, A } from './type'
 import { db } from '~/plugins/firestore'
+import * as User from '~/store/user/type'
 // ______________________________________________________
 //
 export const state = (): S => ({
@@ -79,12 +79,21 @@ export const state = (): S => ({
 })
 // ______________________________________________________
 //
-export const getters: Getters<S, G> = {
+export const getters: {
+  [K in keyof G]: (
+    state: S,
+    getters: G,
+    rootState: any,
+    rootGetters: any
+  ) => G[K]
+} = {
   //
 }
 // ______________________________________________________
 //
-export const mutations: Mutations<S, M> = {
+export const mutations: {
+  [K in keyof M]: (state: S, payload: M[K]) => void
+} = {
   isAuthenticatedFlgChange(state: any, authFlg: any) {
     state.isAuthenticatedFlg = authFlg
   },
@@ -100,7 +109,21 @@ export const mutations: Mutations<S, M> = {
 }
 // ______________________________________________________
 //
-export const actions: Actions<S, A, G, M> = {
+export const actions: {
+  [K in keyof A]: (
+    ctx: {
+      commit: <T extends keyof M>(type: T, payload?: M[T]) => void
+      dispatch: <T extends keyof A>(type: T, payload?: A[T]) => any
+      state: S
+      getters: G
+      rootState: {
+        user: User.S
+      }
+      rootGetters: User.RG
+    },
+    payload: A[K]
+  ) => any
+} = {
   async setUser(ctx: any, user: any) {
     const providerData = user.providerData.map((v: any) => {
       return { ...v }

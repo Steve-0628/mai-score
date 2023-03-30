@@ -76,6 +76,7 @@ import * as Vuex from 'vuex'
 import firebase from 'firebase'
 import { db } from '~/plugins/firestore'
 import auth from '~/plugins/auth'
+import * as User from '~/store/user/type'
 
 interface publicUserData {
   displayName: string
@@ -114,7 +115,9 @@ interface publicUserData {
   }
 })
 export default class SettingPage extends Vue {
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   rules = {
     required: (value: string) => !!value || '必須項目です',

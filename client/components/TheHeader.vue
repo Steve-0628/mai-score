@@ -38,9 +38,12 @@
 import { Component, Vue } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
 import auth from '~/plugins/auth'
+import * as User from '~/store/user/type'
 @Component
 export default class TheHeader extends Vue {
-  $store!: Vuex.ExStore
+  $store!: Vuex.Store<{
+    user: User.S
+  }>
 
   get isAuthenticatedFlg() {
     return this.$store.state.user.isAuthenticatedFlg

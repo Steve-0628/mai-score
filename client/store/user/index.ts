@@ -85,24 +85,24 @@ export const getters: Getters<S, G> = {
 // ______________________________________________________
 //
 export const mutations: Mutations<S, M> = {
-  isAuthenticatedFlgChange(state, authFlg) {
+  isAuthenticatedFlgChange(state: any, authFlg: any) {
     state.isAuthenticatedFlg = authFlg
   },
-  setUID(state, uid) {
+  setUID(state: any, uid: any) {
     state.uid = uid
   },
-  setProviderData(state, providerData) {
+  setProviderData(state: any, providerData: any) {
     state.providerData = providerData
   },
-  setFilterOption(state, filterOption) {
+  setFilterOption(state: any, filterOption: any) {
     state.filterOption = JSON.parse(JSON.stringify(filterOption))
   }
 }
 // ______________________________________________________
 //
 export const actions: Actions<S, A, G, M> = {
-  async setUser(ctx, user) {
-    const providerData = user.providerData.map((v) => {
+  async setUser(ctx: any, user: any) {
+    const providerData = user.providerData.map((v: any) => {
       return { ...v }
     }) as firebase.UserInfo[]
 
@@ -158,11 +158,11 @@ export const actions: Actions<S, A, G, M> = {
       console.error(error)
     }
   },
-  logout(ctx) {
+  logout(ctx: any) {
     ctx.commit('isAuthenticatedFlgChange', false)
     ctx.commit('setUID', '')
   },
-  async saveTwitterToken(ctx, credential) {
+  async saveTwitterToken(ctx: any, credential: any) {
     await db
       .collection('users')
       .doc(ctx.state.uid)

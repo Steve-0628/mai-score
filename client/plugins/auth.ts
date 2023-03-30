@@ -5,7 +5,7 @@ const twitter = new firebase.auth.TwitterAuthProvider()
 const auth = {
   // Twitterサインイン
   twitterLogin() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       firebase
         .auth()
         .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -50,7 +50,7 @@ const auth = {
   },
   // サインアウト
   logout() {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       firebase
         .auth()
         .signOut()
@@ -66,7 +66,7 @@ const auth = {
   },
   // ユーザプロフィールの変更
   editUserProfile(userName: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const user = firebase.auth().currentUser
 
       if (user) {

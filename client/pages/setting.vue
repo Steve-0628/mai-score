@@ -73,6 +73,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import * as Vuex from 'vuex'
+import firebase from 'firebase'
 import { db } from '~/plugins/firestore'
 import auth from '~/plugins/auth'
 
@@ -144,7 +145,7 @@ export default class SettingPage extends Vue {
   isDXScoreNotOnTheTweetImg = false
 
   get isTwitterLogin(): boolean {
-    return this.$store.state.user.providerData.some((v) => {
+    return this.$store.state.user.providerData.some((v: firebase.UserInfo) => {
       return v.providerId === 'twitter.com'
     })
   }
